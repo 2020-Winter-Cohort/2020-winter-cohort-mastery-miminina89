@@ -11,13 +11,14 @@
 </head>
 
 <body>
+
 <div class="container">
     <header class="header">
-        <h1 class="header__title">Surviving Coding Boot Camp</h1>
-        <nav class="header__nav">
-            <div class="header__nav-item"><a href="/" class="header__nav-link">Home</a></div>
-            <div class="header__nav-item"><a href="/hashtags" class="header__nav-link">Hashtags</a></div>
-        </nav>
+
+        <ul>
+            <li><a href="/" class="header__nav-link">Home</a></li>
+            <li><a href="/hashtags" class="header__nav-link">Hashtags</a></li>
+        </ul>
     </header>
     <main class="main-content">
         <section class="main-content__topic topic">
@@ -31,8 +32,21 @@
                 </div>
             </nav>
         </section>
+        <section>
+            <form th:action="'/posts/addPost/'+${topic.id}" method="post">
+                <p>Add a Post</p>
+                <label for="title">Title:  </label>
+                <input type="text" id="title" name="newTitle"/>
+
+                <label for="content">Content:  </label>
+                <textarea type="text" id="content" name="newContent"></textarea>
+
+                <label for="author">Author:  </label>
+                <input type="text" id="author" name="newAuthor"/>
+                <button type="submit">Add Post</button>
+            </form>
+        </section>
     </main>
 </div>
 </body>
 
-</html>

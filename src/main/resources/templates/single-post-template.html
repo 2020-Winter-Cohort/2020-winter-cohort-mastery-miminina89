@@ -11,13 +11,14 @@
 </head>
 
 <body>
+<h1 class="header__title">Surviving Coding Boot Camp</h1>
     <div class="container">
         <header class="header">
-            <h1 class="header__title">Surviving Coding Boot Camp</h1>
-            <nav class="header__nav">
-                <div class="header__nav-item"><a href="/" class="header__nav-link">Home</a></div>
-                <div class="header__nav-item"><a href="/hashtags" class="header__nav-link">Hashtags</a></div>
-            </nav>
+
+            <ul>
+                <li><a href="/" class="header__nav-link">Home</a></li>
+                <li><a href="/hashtags" class="header__nav-link">Hashtags</a></li>
+            </ul>
         </header>
         <main class="main-content">
             <section class="main-content__post post">
@@ -27,7 +28,29 @@
                 <p th:text="${post.content}" class="post__content">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloremque blanditiis, aut quae fuga id quis ut. 
                     Eligendi necessitatibus blanditiis officia, odio deleniti natus molestiae fugiat ex quod vel aliquam illum.
                 </p>
+                <h4 th:text="${post.author}" class="post__author main-content__topic-title">author</h4>
             </section>
+
+            <section>
+
+                <form th:action="'/addHashtag/'+ ${post.id}" method="post">
+                    <p>Add a Hashtag</p>
+                    <input type="text" name="newHashtag"/>
+                    <button type="submit">Add Hashtag</button>
+                </form>
+            </section>
+            <section>
+                <form th:action="'/addComment/' + ${post.id}" method="POST">
+                    <label for="commentBox">Enter Comment: </label>
+                    <input type="text" id="commentBox" name="newComment">
+                    <button type="submit">Add Comment</button>
+                </form>
+            </section>
+
+            <div th:each="list:${AllComment}">
+                <p th:text="${list.name}">name</p>
+
+            </div>
         </main>
     </div>
 

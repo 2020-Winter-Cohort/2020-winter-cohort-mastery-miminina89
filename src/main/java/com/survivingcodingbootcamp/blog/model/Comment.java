@@ -3,24 +3,29 @@ package com.survivingcodingbootcamp.blog.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
-public class Topic {
+public class Comment {
     @Id
     @GeneratedValue
     private Long id;
     private String name;
-    @OneToMany(mappedBy = "topic")
-    private Collection<Post> posts;
 
-   public Topic() {
-    }
+    @ManyToMany
+    public Collection<Post> PostComment;
 
-    public Topic(String name) {
+    public Comment( String name, Post... postComment) {
         this.name = name;
+        this.PostComment = List.of(postComment);
     }
+
+    public Comment() {
+
+    }
+
 
     public Long getId() {
         return id;
@@ -30,13 +35,13 @@ public class Topic {
         return name;
     }
 
-    public Collection<Post> getPosts() {
-        return posts;
+    public Collection<Post> getPostComment() {
+        return PostComment;
     }
 
     @Override
     public String toString() {
-        return "Topic{" +
+        return "Comment{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';
@@ -47,10 +52,10 @@ public class Topic {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Topic topic = (Topic) o;
+        Comment comment = (Comment) o;
 
-        if (id != null ? !id.equals(topic.id) : topic.id != null) return false;
-        return name != null ? name.equals(topic.name) : topic.name == null;
+        if (id != null ? !id.equals(comment.id) : comment.id != null) return false;
+        return name != null ? name.equals(comment.name) : comment.name == null;
     }
 
     @Override
